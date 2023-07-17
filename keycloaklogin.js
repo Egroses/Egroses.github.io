@@ -1,5 +1,7 @@
 import Keycloak from 'keycloak-js';
 
+console.log("opened");
+
 const keycloak = new Keycloak({
     url: 'https://sso.consumer.games/auth',
     realm: 'magic',

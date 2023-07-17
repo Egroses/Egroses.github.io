@@ -11,11 +11,7 @@
       console.log(keycloak);
       async function initializeKeycloak() {
         try {
-          const authenticated = await keycloak.init({
-            onLoad: "login-required",
-            timeSkew: 60000,
-            code_challenge_method: "S256",
-          });
+          const authenticated = await keycloak.init();
           console.log(
             `User is ${authenticated ? "authenticated" : "not authenticated"}`
           );

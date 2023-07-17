@@ -18,17 +18,17 @@
           var data = {
             code: _code,
             grant_type: "authorization_code",
-            redirect_uri:
-              "https://sso.consumer.games/auth/realms/magic/account/#/",
             client_id: "account-console",
+            redirect_uri:
+              "https%3A%2F%2Fsso.consumer.games%2Fauth%2Frealms%2Fmagic%2Faccount%2F%23%2F",
           };
 
           fetch(url, {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify(data),
+            body: new URLSearchParams(data).toString(),
             mode: "no-cors",
           })
             .then((response) => {

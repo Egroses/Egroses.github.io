@@ -3,9 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <title>Keycloak Giriş Örneği</title>
-    <script href="keycloaklogin.js"></script>
+    <script src="https://sso.consumer.games/auth/js/keycloak.js"></script>
+    <script>
+      console.log("opened");
+
+      var keycloak = new Keycloak({
+        url: "https://sso.consumer.games/auth",
+        realm: "magic",
+        clientId: "account-console",
+      });
+
+      keycloak
+        .init({ onLoad: "login-required" })
+        .then(function (authenticated) {
+          console.log(
+            "User is " + (authenticated ? "authenticated" : "not authenticated")
+          );
+        })
+        .catch(function (error) {
+          console.error("Failed to initialize adapter:", error);
+        });
+    </script>
   </head>
   <body>
     <h1>Keycloak Giriş Örneği</h1>
+    <div id="kc-form-wrapper">
+      <form
+        id="kc-form-login"
+        onsubmit="login.disabled = true; return true;"
+        action="https://sso.consumer.games/auth/realms/magic/login-actions/authenticate?session_code=4pO1MF633jEV3P5e5J0HnChLUArJUkxrONvXWRtUZ2k&amp;execution=95788358-dff2-421d-91ed-fee5ea1c7763&amp;client_id=account-console&amp;tab_id=m8QHfxwyprE"
+        method="post"
+      >
+        <div class="form-group">
+          <label for="username" class="pf-c-form__label pf-c-form__label-text"
+            >Email</label
+          >
+
+          <input
+            tabindex="1"
+            id="username"
+            aria-invalid=""
+            class="pf-c-form-control"
+            name="username"
+            value=""
+            type="text"
+            autofocus=""
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-group login-pf-settings">
+          <div id="kc-form-options"></div>
+        </div>
+
+        <div id="kc-form-buttons" class="form-group">
+          <input
+            tabindex="4"
+            class="pf-c-button pf-m-primary pf-m-block btn-lg"
+            name="login"
+            id="kc-login"
+            type="submit"
+            value="Sign In"
+          />
+        </div>
+      </form>
+    </div>
   </body>
 </html>

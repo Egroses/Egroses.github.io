@@ -1,32 +1,16 @@
-var keycloak = new Keycloak();
+import Keycloak from 'keycloak-js';
 
-function initKeycloak() {
-    keycloak.init({onLoad: 'login-required'}).then(function() {
-        constructTableRows(keycloak.idTokenParsed);
-        pasteToken(keycloak.token);
-    }).catch(function() {
-        alert('failed to initialize');
+const keycloak = new Keycloak({
+    url: 'https://sso.consumer.games/auth',
+    realm: 'magic',
+    clientId: 'account-console',
+});
+
+try {
+    const authenticated = await keycloak.init({
+        onLoad: 'login-required',
     });
+    console.log(`User is ${authenticated ? 'authenticated' : 'not authenticated'}`);
+} catch (error) {
+    console.error('Failed to initialize adapter:', error);
 }
-
-function constructTableRows(keycloakToken) {
-    document.getElementById('row-username').innerHTML = keycloakToken.preferred_username;
-    document.getElementById('row-firstName').innerHTML = keycloakToken.given_name;
-    document.getElementById('row-lastName').innerHTML = keycloakToken.family_name;
-    document.getElementById('row-name').innerHTML = keycloakToken.name;
-    document.getElementById('row-email').innerHTML = keycloakToken.email;
-}
-
-function pasteToken(token){
-    document.getElementById('ta-token').value = token;
-    document.getElementById('ta-refreshToken').value = keycloak.refreshToken;
-}
-
-var refreshToken = function() {
-    keycloak.updateToken(-1)
-    .then(function(){
-        document.getElementById('ta-token').value = keycloak.token;
-        document.getElementById('ta-refreshToken').value = keycloak.refreshToken;
-    });
-}
-

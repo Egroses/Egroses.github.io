@@ -30,6 +30,11 @@
         }
       }
       initializeKeycloak();
+      window.addEventListener("error", function (e) {
+        e.preventDefault(); // Sayfanın otomatik yenilenmesini önler
+        // Hata mesajını veya diğer hata ayrıntılarını konsola yazdırabilirsiniz
+        console.error("Bir hata oluştu:", e.error);
+      });
     </script>
   </head>
   <body>

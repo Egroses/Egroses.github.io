@@ -3,52 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <title>Keycloak Giriş Örneği</title>
-    <script src="https://cdn.jsdelivr.net/npm/keycloak-js@12.0.3/dist/keycloak.min.js"></script>
     <script>
-      function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-          results = regex.exec(location.search);
-        return results === null
-          ? ""
-          : decodeURIComponent(results[1].replace(/\+/g, " "));
-      }
-
-      var keycloak = Keycloak({
-        realm: "magic",
-        url: "https://sso.consumer.games/auth/",
-        clientId: "account-console",
-      });
-
-      keycloak
-        .init()
-        .then(function (authenticated) {
-          if (authenticated) {
-            // Kullanıcı zaten giriş yapmışsa burada yönlendirme işlemlerini yapabilirsiniz
-            console.log("Kullanıcı zaten giriş yapmış");
-          } else {
-            // Giriş yapmamış kullanıcıyı yönlendir
-            keycloak.login();
-          }
-        })
-        .catch(function (error) {
-          console.error("Konfigürasyon hatası:", error);
-        });
-
       window.addEventListener("load", function () {
-        var code = getParameterByName("code");
+        var currentUrl = window.location.href;
+        var codeStart = "code=";
 
-        if (code) {
-          keycloak
-            .grantManager()
-            .grant({ code: code, redirect_uri: "https://oyun.ates.com" })
-            .then(function (grant) {
-              var token = grant.access_token;
-              // Token'ı kullanarak kullanıcıyı doğrulama ve yetkilendirme işlemlerini gerçekleştirin
-              console.log("Token:", token);
+        var _code = currentUrl.split(codeStart)[1];
+
+        console.log(_code);
+
+        if (_code) {
+          var url =
+            "https://sso.consumer.games/auth/realms/magic/protocol/openid-connect/token";
+          var data = {
+            code: _code,
+            grant_type: "authorization_code",
+            redirect_uri:
+              "https://sso.consumer.games/auth/realms/magic/account/#/",
+            client_id: "account-console",
+          };
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log("Response:", result);
             })
-            .catch(function (error) {
-              console.error("Hata:", error);
+            .catch((error) => {
+              console.error("Error:", error);
             });
         }
       });

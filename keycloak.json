@@ -2,7 +2,8 @@
 	"realm": "magic",
 	"auth-server-url": "https://sso.consumer.games/auth",
 	"ssl-required": "external",
-	"resource": "account-console1",
+	"resource": "account-console",
 	"public-client": true,
-	"codeChallengeMethod": "S256"
+	"codeChallengeMethod": "S256",
+	"timeSkew": 60000
   }

@@ -11,15 +11,16 @@
         url: "https://sso.consumer.games/auth",
         realm: "magic",
         clientId: "account-console",
-        onLoad: "login-required",
-        timeSkew: 60000,
-        flow: "standard",
-        pkceMethod: "S256",
       });
       console.log(keycloak);
       async function initializeKeycloak() {
         try {
-          const authenticated = await keycloak.init();
+          const authenticated = await keycloak.init({
+            onLoad: "login-required",
+            timeSkew: 60000,
+            flow: "standard",
+            pkceMethod: "S256",
+          });
           console.log(
             `User is ${authenticated ? "authenticated" : "not authenticated"}`
           );

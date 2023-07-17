@@ -14,12 +14,14 @@
       });
 
       keycloak
-        .init()
-        .success(function (authenticated) {
-          alert(authenticated ? "authenticated" : "not authenticated");
+        .init({ onLoad: "login-required" })
+        .then(function (authenticated) {
+          alert(
+            "User is " + (authenticated ? "authenticated" : "not authenticated")
+          );
         })
-        .error(function () {
-          alert("failed to initialize");
+        .catch(function (error) {
+          alert("Failed to initialize adapter:", error);
         });
     </script>
   </head>

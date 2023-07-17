@@ -1,8 +1,8 @@
 {
 	"realm": "magic",
-	"auth-server-url":"https://sso.consumer.games/auth/realms/magic/protocol/openid-connect/auth?",
-	"ssl-required":"external",
-	"resource":"account-console",
-	"public-client":true,
-	"confidential-por":0
-}
+	"auth-server-url": "https://sso.consumer.games/auth",
+	"ssl-required": "external",
+	"resource": "account-console",
+	"public-client": true,
+	"codeChallengeMethod": "S256"
+  }

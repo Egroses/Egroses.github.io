@@ -1,4 +1,4 @@
-console.log("Welcome!");
+console.log("Welcome?");
 
 var keycloak = new Keycloak({
     url: "https://sso.consumer.games/auth",

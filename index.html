@@ -7,7 +7,7 @@
   <title>Wayfarer Solutions | CouponCollect</title>
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
-  <script href="wheel.js"></script>
+  <script src="wheel.js"></script>
 </head>
 
 <body>
@@ -75,13 +75,13 @@
     var config = {
       dataUrl: buildUrl + "/Egroses.github.io.data",
       frameworkUrl: buildUrl + "/Egroses.github.io.framework.js",
-        codeUrl: buildUrl + "/Egroses.github.io.wasm",
-        streamingAssetsUrl: "StreamingAssets",
+      codeUrl: buildUrl + "/Egroses.github.io.wasm",
+      streamingAssetsUrl: "StreamingAssets",
       companyName: "DefaultCompany",
-    productName: { { { JSON.stringify(PRODUCT_NAME) } } },
-    productVersion: { { { JSON.stringify(PRODUCT_VERSION) } } },
-    showBanner: unityShowBanner,
-      };
+      productName: JSON.stringify(PRODUCT_NAME),
+      productVersion: JSON.stringify(PRODUCT_VERSION),
+      showBanner: unityShowBanner,
+    };
 
     // By default Unity keeps WebGL canvas render target size matched with
     // the DOM size of the canvas element (scaled by window.devicePixelRatio)

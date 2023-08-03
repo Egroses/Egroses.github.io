@@ -6,14 +6,17 @@ var keycloak = new Keycloak({
     clientId: "account-console",
 });
 console.log(keycloak);
+
 async function initializeKeycloak() {
     try {
-        const authenticated = await keycloak.init({
+        const initOptions = {
             onLoad: "login-required",
             timeSkew: 60000,
             flow: "standard",
             pkceMethod: "S256",
-        });
+        };
+
+        const authenticated = await keycloak.init(initOptions);
         console.log(
             `User is ${authenticated ? "authenticated" : "not authenticated"}`
         );

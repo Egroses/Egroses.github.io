@@ -14,6 +14,7 @@ async function initializeKeycloak() {
             timeSkew: 60000,
             flow: "standard",
             pkceMethod: "S256",
+            cors: true,
         };
 
         const authenticated = await keycloak.init(initOptions);

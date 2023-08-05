@@ -24,6 +24,7 @@ async function initializeKeycloak() {
         document.getElementById("login-button").style.display = "none";
         document.getElementById("unity-container").style.display = "block";
     } catch (error) {
+        console.log(keycloak.token, " wow");
         console.error("Failed to initialize adapter:", error);
         console.error("Failed to initialize adapter:", JSON.stringify(error));
     }

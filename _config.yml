@@ -1,4 +1,0 @@
-defaults:
-
-  cors:
-    - "Content-Security-Policy: upgrade-insecure-request"

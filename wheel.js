@@ -3,7 +3,7 @@ console.log("Welcome! 3");
 var keycloak = new Keycloak({
     url: "https://sso.consumer.games/auth",
     realm: "magic",
-    clientId: "account-console",
+    client_id:"account-console",
 });
 console.log(keycloak);
 async function initializeKeycloak() {
